@@ -1,0 +1,240 @@
+[
+    {
+        "id": 1,
+        "question_template": "What is the <1> for <2> of <3>",
+        "question_regex": "What is the (.*?) for (.*?) of (.*?)$",
+        "query_template": "select distinct ?obj where { <1> <2> ?obj . ?obj wdt:P31 <3> }",
+        "query_regex": "select distinct \\?obj where { (.*?) (.*?) \\?obj \\. \\?obj wdt:P31 (.*?) }$"
+    },
+    {
+        "id": 2,
+        "question_template": "What is <3> of <2> of <1> ?",
+        "question_regex": "What is (.*?) of (.*?) of (.*?) \\?$",
+        "query_template": "select ?answer where { <1> <2> ?x . ?x <3> ?answer}",
+        "query_regex": "select \\?answer where { (.*?) (.*?) \\?x \\. \\?x (.*?) \\?answer}$"
+    },
+    {
+        "id": 3,
+        "question_template": "Did <1> <2> <3> and <4> ?",
+        "question_regex": "Did (.*?) (.*?) (.*?) and (.*?) \\?$",
+        "query_template": "ask where { <1> <2> <3> . <1> <2> <4> }",
+        "query_regex": "ask where { (.*?) (.*?) (.*?) \\. (.*?) (.*?) (.*?) }$"
+    },
+    {
+        "id": 4,
+        "question_template": "What is <1> of <2> ?",
+        "question_regex": "What is (.*?) of (.*?) \\?$",
+        "query_template": "select distinct ?answer where { <2> <1> ?answer}",
+        "query_regex": "select distinct \\?answer where { (.*?) (.*?) \\?answer}$"
+    },
+    {
+        "id": 5,
+        "question_template": "Give me <1> that starts with <2>",
+        "question_regex": "Give me (.*?) that starts with (.*?)$",
+        "query_template": "select distinct ?sbj ?sbj_label where { ?sbj wdt:P31 <1> . ?sbj rdfs:label ?sbj_label . filter(strstarts(lcase(?sbj_label), <2>)) . filter (lang(?sbj_label) = 'en') } limit 25",
+        "query_regex": "select distinct \\?sbj \\?sbj_label where { \\?sbj wdt:P31 (.*?) \\. \\?sbj rdfs:label \\?sbj_label \\. filter\\(strstarts\\(lcase\\(\\?sbj_label\\), (.*?)\\)\\) \\. filter \\(lang\\(\\?sbj_label\\) = \\'en\\'\\) } limit 25$"
+    },
+    {
+        "id": 6,
+        "question_template": "Does the <1> of the <2> <3> <4>",
+        "question_regex": "Does the (.*?) of the (.*?) (.*?) (.*?)$",
+        "query_template": "ask where { <2> <1> ?obj filter(?obj <3> <4>) } ",
+        "query_regex": "ask where { (.*?) (.*?) \\?obj filter\\(\\?obj (.*?) (.*?)\\) }$"
+    },
+    {
+        "id": 7,
+        "question_template": "Give me <1> that <2> <3> and which contains the word <4> in their name",
+        "question_regex": "Give me (.*?) that (.*?) (.*?) and which contains the word (.*?) in their name$",
+        "query_template": "select distinct ?sbj ?sbj_label where { ?sbj wdt:P31 <1> . ?sbj <2> <3> . ?sbj rdfs:label ?sbj_label . filter(contains(lcase(?sbj_label), <4>)) . filter (lang(?sbj_label) = 'en') } limit 25",
+        "query_regex": "select distinct \\?sbj \\?sbj_label where { \\?sbj wdt:P31 (.*?) \\. \\?sbj (.*?) (.*?) \\. \\?sbj rdfs:label \\?sbj_label \\. filter\\(contains\\(lcase\\(\\?sbj_label\\), (.*?)\\)\\) \\. filter \\(lang\\(\\?sbj_label\\) = \\'en\\'\\) } limit 25$"
+    },
+    {
+        "id": 8,
+        "question_template": "What is <1> of <2> that is <3> is <4> ?",
+        "question_regex": "What is (.*?) of (.*?) that is (.*?) is (.*?) \\?$",
+        "query_template": "select ?obj where { <2> <p:1> ?s . ?s <ps:1> ?obj . ?s <3> ?x filter(contains(year(?x),<4>)) }",
+        "query_regex": "select \\?obj where { (.*?) (.*?) \\?s \\. \\?s (.*?) \\?obj \\. \\?s (.*?) \\?x filter\\(contains\\(year\\(\\?x\\),(.*?)\\)\\) }$"
+    },
+    {
+        "id": 9,
+        "question_template": "What is the <1> for <2> of <3>",
+        "question_regex": "What is the (.*?) for (.*?) of (.*?)$",
+        "query_template": "select distinct ?sbj where { ?sbj <2> <3> . ?sbj wdt:P31 <1> }",
+        "query_regex": "select distinct \\?sbj where { \\?sbj (.*?) (.*?) \\. \\?sbj wdt:P31 (.*?) }$"
+    },
+    {
+        "id": 10,
+        "question_template": "what is the <3> for <1> has <2> as <4> ?",
+        "question_regex": "what is the (.*?) for (.*?) has (.*?) as (.*?) \\?$",
+        "query_template": "select ?value where { <1> <p:2> ?s . ?s <ps:2> ?x filter(contains(year(?x),<4>)) . ?s <3> ?value}",
+        "query_regex": "select \\?value where { (.*?) (.*?) \\?s \\. \\?s (.*?) \\?x filter\\(contains\\(year\\(\\?x\\),(.*?)\\)\\) \\. \\?s (.*?) \\?value}$"
+    },
+    {
+        "id": 11,
+        "question_template": "What is the <2> and the <3> of <1> ?",
+        "question_regex": "What is the (.*?) and the (.*?) of (.*?) \\?$",
+        "query_template": "select ?ans_1 ?ans_2 where { <1> <2> ?ans_1 . <1> <3> ?ans_2 }",
+        "query_regex": "select \\?ans_1 \\?ans_2 where { (.*?) (.*?) \\?ans_1 \\. (.*?) (.*?) \\?ans_2 }$"
+    },
+    {
+        "id": 12,
+        "question_template": "What is the <3> with the <max:2> ?",
+        "question_regex": "What is the (.*?) with the (.*?) \\?$",
+        "query_template": "select ?ent where { ?ent wdt:P31 <3> . ?ent <2> ?obj } order by desc(?obj)limit 5",
+        "query_regex": "select \\?ent where { \\?ent wdt:P31 (.*?) \\. \\?ent (.*?) \\?obj } order by desc\\(\\?obj\\)limit 5$"
+    },
+    {
+        "id": 13,
+        "question_template": "What is <1> of <2>, that has <3> is <4> ?",
+        "question_regex": "What is (.*?) of (.*?), that has (.*?) is (.*?) \\?$",
+        "query_template": "select ?answer where { <2> <1> ?answer . ?answer <3> <4>}",
+        "query_regex": "select \\?answer where { (.*?) (.*?) \\?answer \\. \\?answer (.*?) (.*?)}$"
+    },
+    {
+        "id": 14,
+        "question_template": "Did <1> <2> <3>?",
+        "question_regex": "Did (.*?) (.*?) (.*?)\\?$",
+        "query_template": "ask where { <1> <2> <3> }",
+        "query_regex": "ask where { (.*?) (.*?) (.*?) }$"
+    },
+    {
+        "id": 15,
+        "question_template": "How many <1> are for <2> ?",
+        "question_regex": "How many (.*?) are for (.*?) \\?$",
+        "query_template": "select (count(?obj) as ?value ) { <2> <1> ?obj }",
+        "query_regex": "select \\(count\\(\\?obj\\) as \\?value \\) { (.*?) (.*?) \\?obj }$"
+    },
+    {
+        "id": 16,
+        "question_template": "what is the <1> for <2> has <3> as <4> ?$",
+        "question_regex": "what is the (.*?) for (.*?) has (.*?) as (.*?) \\?$$",
+        "query_template": "select ?value where { <2> <3> ?s . ?s <3> <4> . ?s <1> ?value}",
+        "query_regex": "select \\?value where { (.*?) (.*?) \\?s \\. \\?s (.*?) (.*?) \\. \\?s (.*?) \\?value}$"
+    },
+    {
+        "id": 17,
+        "question_template": "Give me <1> that contains the word <2> in their name$",
+        "question_regex": "Give me (.*?) that contains the word (.*?) in their name$$",
+        "query_template": "select distinct ?sbj ?sbj_label where { ?sbj wdt:P31 <1> . ?sbj rdfs:label ?sbj_label . filter(CONTAINS(lcase(?sbj_label), <2>)) . filter (lang(?sbj_label) = 'en') } limit 25",
+        "query_regex": "select distinct \\?sbj \\?sbj_label where { \\?sbj wdt:P31 (.*?) \\. \\?sbj rdfs:label \\?sbj_label \\. filter\\(CONTAINS\\(lcase\\(\\?sbj_label\\), (.*?)\\)\\) \\. filter \\(lang\\(\\?sbj_label\\) = \\'en\\'\\) } limit 25$"
+    },
+    {
+        "id": 18,
+        "question_template": "What is the <1> with the <max:2> whose <3> is <4>  ?",
+        "question_regex": "What is the (.*?) with the (.*?) whose (.*?) is (.*?)  \\?$",
+        "query_template": "select ?ent where { ?ent wdt:P31 <1> . ?ent <2> ?obj . ?ent <3> <4> } order by desc(?obj)limit 5",
+        "query_regex": "select \\?ent where { \\?ent wdt:P31 (.*?) \\. \\?ent (.*?) \\?obj \\. \\?ent (.*?) (.*?) } order by desc\\(\\?obj\\)limit 5$"
+    },
+    {
+        "id": 19,
+        "question_template": "What is the <1> with the <min:2> whose <3> is <4> ?",
+        "question_regex": "What is the (.*?) with the (.*?) whose (.*?) is (.*?) \\?$",
+        "query_template": "select ?ent where { ?ent wdt:P31 <1> . ?ent <2> ?obj . ?ent <3> <4> } order by asc(?obj)limit 5 ",
+        "query_regex": "select \\?ent where { \\?ent wdt:P31 (.*?) \\. \\?ent (.*?) \\?obj \\. \\?ent (.*?) (.*?) } order by asc\\(\\?obj\\)limit 5$"
+    },
+    {
+        "id": 20,
+        "question_template": "What is <2> of <1> that is <3> is <4> ?$",
+        "question_regex": "What is (.*?) of (.*?) that is (.*?) is (.*?) \\?$$",
+        "query_template": "select ?obj where { <1> <p:2> ?s . ?s <ps:2> ?obj . ?s <3> <4> }",
+        "query_regex": "select \\?obj where { (.*?) (.*?) \\?s \\. \\?s (.*?) \\?obj \\. \\?s (.*?) (.*?) }$"
+    },
+    {
+        "id": 21,
+        "question_template": "What is <1> of <2> ?",
+        "question_regex": "What is (.*?) of (.*?) \\?$",
+        "query_template": "select distinct ?answer where { ?answer <1> <2>}",
+        "query_regex": "select distinct \\?answer where { \\?answer (.*?) (.*?)}$"
+    },
+    {
+        "id": 22,
+        "question_template": "What is <1> of <2>, that has <3> is <4> ?",
+        "question_regex": "What is (.*?) of (.*?), that has (.*?) is (.*?) \\?$",
+        "query_template": "select ?answer where { <2> <1> ?answer . ?answer <3> ?x FILTER(contains(?x,<4>))}",
+        "query_regex": "select \\?answer where { (.*?) (.*?) \\?answer \\. \\?answer (.*?) \\?x FILTER\\(contains\\(\\?x,(.*?)\\)\\)}$"
+    },
+    {
+        "id": 23,
+        "question_template": "Give me <1> that <2> <3> and which that starts with <4>",
+        "question_regex": "Give me (.*?) that (.*?) (.*?) and which that starts with (.*?)$",
+        "query_template": "select distinct ?sbj ?sbj_label where { ?sbj wdt:P31 <1> . ?sbj <2> <3> . ?sbj rdfs:label ?sbj_label . filter(STRSTARTS(lcase(?sbj_label), <4>)) . filter (lang(?sbj_label) = 'en') } limit 25 ",
+        "query_regex": "select distinct \\?sbj \\?sbj_label where { \\?sbj wdt:P31 (.*?) \\. \\?sbj (.*?) (.*?) \\. \\?sbj rdfs:label \\?sbj_label \\. filter\\(STRSTARTS\\(lcase\\(\\?sbj_label\\), (.*?)\\)\\) \\. filter \\(lang\\(\\?sbj_label\\) = \\'en\\'\\) } limit 25$"
+    },
+    {
+        "id": 24,
+        "question_template": "What is <1> of <2> and <3>",
+        "question_regex": "What is (.*?) of (.*?) and (.*?)$",
+        "query_template": "select ?value1 ?obj where { <2> <1> ?s . ?s <1> ?obj . ?s <3> ?value1 . }",
+        "query_regex": "select \\?value1 \\?obj where { (.*?) (.*?) \\?s \\. \\?s (.*?) \\?obj \\. \\?s (.*?) \\?value1 \\. }$"
+    },
+    {
+        "id": 25,
+        "question_template": "What is <1> and <2> of <3> has <4> as <5>",
+        "question_regex": "What is (.*?) and (.*?) of (.*?) has (.*?) as (.*?)$",
+        "query_template": "select ?value1 ?value2 where { <3> <4> ?s . ?s <4> <5> . ?s <1> ?value1 . ?s <2> ?value2 }",
+        "query_regex": "select \\?value1 \\?value2 where { (.*?) (.*?) \\?s \\. \\?s (.*?) (.*?) \\. \\?s (.*?) \\?value1 \\. \\?s (.*?) \\?value2 }$"
+    },
+    {
+        "id": 26,
+        "question_template": "What is the <1> with the <min:2> whose <3> is <4>  ?",
+        "question_regex": "What is the (.*?) with the (.*?) whose (.*?) is (.*?)  \\?$",
+        "query_template": "select ?ent where { ?ent wdt:P31 <1> . ?ent <2> ?obj . ?ent <3> <4>} order by asc(?obj)limit 5 ",
+        "query_regex": "select \\?ent where { \\?ent wdt:P31 (.*?) \\. \\?ent (.*?) \\?obj \\. \\?ent (.*?) (.*?)} order by asc\\(\\?obj\\)limit 5$"
+    },
+    {
+        "id": 27,
+        "question_template": "what is the <4> for <1> has <2> as <3> ?",
+        "question_regex": "what is the (.*?) for (.*?) has (.*?) as (.*?) \\?$",
+        "query_template": "select ?value where { <1> <2> ?s . ?s <2> ?x filter(contains(?x,<3>)) . ?s <4> ?value}",
+        "query_regex": "select \\?value where { (.*?) (.*?) \\?s \\. \\?s (.*?) \\?x filter\\(contains\\(\\?x,(.*?)\\)\\) \\. \\?s (.*?) \\?value}$"
+    },
+    {
+        "id": 28,
+        "question_template": "How many <1> are to/by <2> ?",
+        "question_regex": "How many (.*?) are to/by (.*?) \\?$",
+        "query_template": "select (count(?sub) as ?value ) { ?sub <1> <2> }",
+        "query_regex": "select \\(count\\(\\?sub\\) as \\?value \\) { \\?sub (.*?) (.*?) }$"
+    },
+    {
+        "id": 29,
+        "question_template": "What is <2> of <1>, that has <3> is <4> ?",
+        "question_regex": "What is (.*?) of (.*?), that has (.*?) is (.*?) \\?$",
+        "query_template": "select ?answer where { <1> <2> ?answer . ?answer <3> ?x FILTER(contains(?x,<4>))}",
+        "query_regex": "select \\?answer where { (.*?) (.*?) \\?answer \\. \\?answer (.*?) \\?x FILTER\\(contains\\(\\?x,(.*?)\\)\\)}$"
+    },
+    {
+        "id": 30,
+        "question_template": "What is <2> of <1> that has <3> is <4> ?",
+        "question_regex": "What is (.*?) of (.*?) that has (.*?) is (.*?) \\?$",
+        "query_template": "select ?answer where { <1> <2> ?answer . ?answer <3> ?x FILTER(contains(?x,<4>))}",
+        "query_regex": "select \\?answer where { (.*?) (.*?) \\?answer \\. \\?answer (.*?) \\?x FILTER\\(contains\\(\\?x,(.*?)\\)\\)}$"
+    },
+    {
+        "id": 31,
+        "question_template": "What is <1> of <2> that is <3> is <4> ?",
+        "question_regex": "What is (.*?) of (.*?) that is (.*?) is (.*?) \\?$",
+        "query_template": "select ?obj where { <2> <p:1> ?s . ?s <ps:1> ?obj . ?s <3> ?x filter(contains(?x,<4>)) }",
+        "query_regex": "select \\?obj where { (.*?) (.*?) \\?s \\. \\?s (.*?) \\?obj \\. \\?s (.*?) \\?x filter\\(contains\\(\\?x,(.*?)\\)\\) }$"
+    },
+    {
+        "id": 32,
+        "question_template": "What is <1> of <2> that is <3> is <4> ?",
+        "question_regex": "What is (.*?) of (.*?) that is (.*?) is (.*?) \\?$",
+        "query_template": "select ?obj where { <2> <p:1> ?s . ?s <ps:1> ?obj . ?s <3> ?x filter(contains(?x,<4>))}",
+        "query_regex": "select \\?obj where { (.*?) (.*?) \\?s \\. \\?s (.*?) \\?obj \\. \\?s (.*?) \\?x filter\\(contains\\(\\?x,(.*?)\\)\\)}$"
+    },
+    {
+        "id": 33,
+        "question_template": "What is <1> of <2> that is <3> is <4> ?",
+        "question_regex": "What is (.*?) of (.*?) that is (.*?) is (.*?) \\?$",
+        "query_template": "select ?answer WHERE { <2> <1> ?answer . ?answer <3> ?x FILTER(contains(YEAR(?x),<4>))}",
+        "query_regex": "select \\?answer where { (.*?) (.*?) \\?answer \\. \\?answer (.*?) \\?x filter\\(contains\\(year\\(\\?x\\),(.*?)\\)\\)}$"
+    },
+    {
+        "id": 34,
+        "question_template": "What is <2> of <1>, that has <3> is <4> ?",
+        "question_regex": "What is (.*?) of (.*?), that has (.*?) is (.*?) \\?$",
+        "query_template": "select ?answer where { <1> <2> ?answer . ?answer <3> ?x FILTER(contains(year(?x),<4>))}",
+        "query_regex": "select \\?answer where { (.*?) (.*?) \\?answer \\. \\?answer (.*?) \\?x FILTER\\(contains\\(YEAR\\(\\?x\\),(.*?)\\)\\)}$"
+    }
+]
